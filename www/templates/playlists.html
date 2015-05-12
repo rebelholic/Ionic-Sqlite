@@ -1,0 +1,14 @@
+<ion-view view-title="Data Form">
+  <ion-content>
+   <div class="list">
+<label>
+    <input type="text" placeholder="Name" ng-model="model.name" name="rName">
+  </label>
+  <label>
+    <input type="text" placeholder="Phone" ng-model="model.phone" name="rPhone">
+  </label>
+</div>
+      <button class="button" ng-click="insert(model)">Save</button>
+      <button class="button" ng-click="more(model)">Add More Detail</button>
+  </ion-content>
+</ion-view>
