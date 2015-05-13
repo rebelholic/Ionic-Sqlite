@@ -54,6 +54,18 @@ angular.module('starter.controllers', [])
         });
         $state.go('app.more');
     }
+    
+     $scope.categories = [];
+    var query2 = "SELECT id, name, phone, email FROM company";
+        $cordovaSQLite.execute(db, query2, []).then(function(res) {
+            if(res.rows.length > 0) {
+                for(var i = 0; i < res.rows.length; i++) {
+                    $scope.categories.push({id: res.rows.item(i).id, name: res.rows.item(i).name, phone: res.rows.item(i).phone, email: res.rows.item(i).email});
+                }
+            }
+        }, function (err) {
+            console.error(err);
+        });  
 })
 
 .controller('MoreCtrl', function($scope, $state, $cordovaSQLite) {

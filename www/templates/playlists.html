@@ -10,5 +10,12 @@
 </div>
       <button class="button" ng-click="insert(model)">Save</button>
       <button class="button" ng-click="more(model)">Add More Detail</button>
+        
+         <ion-item ng-repeat="company in categories">
+         
+                {{company.name}}
+                {{company.phone}}
+                {{company.email}}
+            </ion-item>
   </ion-content>
 </ion-view>
