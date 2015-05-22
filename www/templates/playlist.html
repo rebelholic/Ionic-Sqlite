@@ -1,11 +1,20 @@
-<ion-view view-title="Add More Detail">
-  <ion-content>
+<ion-view view-title="Add More Detail" >
+<div class="bar bar-subheader">
+  <h2 class="title">{{model.name}}</h2>
+</div>
+  <ion-content class="has-header has-subheader"> 
+         <div class="list">       
+{{model.name}}
+{{model.phone}}
+{{model.email}}
+</div>
     <div class="list">
 <label>
     <input type="text" placeholder="Email" ng-model="model.email" name="rEmail">
   </label>
-  
+ 
 </div>
- <button class="button" ng-click="insert(model)">Save and Back</button>
+
+ <a href="#/app/playlists" button class="button" >Save and Back</button></a>
   </ion-content>
 </ion-view>

@@ -33,7 +33,10 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope, $state, $cordovaSQLite) {
+.controller('PlaylistsCtrl', function($scope, $state, $cordovaSQLite, $cordovaPrinter, Model) {
+  $scope.model = Model;
+  console.log(Model);
+  
  $scope.insert = function(model) {
         console.log(model);
         var query = "INSERT INTO company (name, phone, email) VALUES (?,?,?)";
@@ -42,19 +45,15 @@ angular.module('starter.controllers', [])
         }, function (err) {
             console.log(err);
         });
+
+        if($cordovaPrinter.isAvailable()) {
+            $cordovaPrinter.print(page, 'playlists.html');
+        } else {
+            alert("Printing is not available on device");
+        }
     }
     
-     $scope.more = function(model) {
-        console.log(model);
-        var query = "INSERT INTO company (name, phone, email) VALUES (?,?,?)";
-        $cordovaSQLite.execute(db, query, [model.name, model.phone]).then(function(res) {
-            console.log("INSERT ID test-> " + res.insertId);
-        }, function (err) {
-            console.log(err);
-        });
-        $state.go('app.more');
-    }
-    
+  
      $scope.categories = [];
     var query2 = "SELECT id, name, phone, email FROM company";
         $cordovaSQLite.execute(db, query2, []).then(function(res) {
@@ -68,16 +67,8 @@ angular.module('starter.controllers', [])
         });  
 })
 
-.controller('MoreCtrl', function($scope, $state, $cordovaSQLite) {
-   $scope.insert = function(model) {
-        console.log(model);
-        var query = "INSERT INTO company (name, phone, email) VALUES (?,?,?)";
-        $cordovaSQLite.execute(db, query, [model.name, model.phone, model.email]).then(function(res) {
-            console.log("INSERT ID test-> " + res.insertId);
-        }, function (err) {
-            console.log(err);
-        });
-         $state.go('app.playlists');
-    }
+.controller('MoreCtrl', function($scope, $ionicHistory, Model) {
+   $scope.model = Model;
+   console.log(Model);
   
 });
